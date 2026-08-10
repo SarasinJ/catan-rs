@@ -1,0 +1,7 @@
+[package]
+name = "catan-server"
+version.workspace = true
+edition.workspace = true
+
+# Intentionally empty until M4 (tokio + axum land there, not before).
+[dependencies]

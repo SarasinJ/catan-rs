@@ -1,0 +1,15 @@
+[workspace]
+resolver = "2"
+members = ["crates/catan-core", "crates/catan-server"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+
+# The approved dependency set. Versions are defined ONLY here; a crate opts in
+# with `foo = { workspace = true }` in its own Cargo.toml. Adding anything new
+# to this list is a PR discussion, not a drive-by.
+[workspace.dependencies]
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"    # dev-dependency only (tests)
+rand = "0.8"        # pinned to 0.8: matches the API names used in issue specs

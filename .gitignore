@@ -1,0 +1,16 @@
+# Rust build artifacts
+/target/
+
+# Rust backup files
+**/*.rs.bk
+
+# Editor and IDE settings
+/.junie/
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# macOS files
+.DS_Store

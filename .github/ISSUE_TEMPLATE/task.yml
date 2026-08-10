@@ -1,0 +1,60 @@
+name: Task
+description: A small, fully-specified unit of work
+title: "area: short description"
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: What we're building and why, in one or two sentences.
+    validations:
+      required: true
+  - type: textarea
+    id: spec
+    attributes:
+      label: Spec
+      description: Signatures, inputs/outputs, exact behavior. Someone should be able to implement this without asking questions.
+      placeholder: |
+        In `catan-core`, module `src/foo.rs`:
+
+        ```rust
+        pub fn foo(x: X, y: Y) -> Result<Q, FooError>
+        ```
+        - behavior detail 1
+        - behavior detail 2
+    validations:
+      required: true
+  - type: textarea
+    id: invariants
+    attributes:
+      label: Must hold
+      description: Invariants that can never be violated.
+      placeholder: "- counts are never negative"
+  - type: textarea
+    id: tests
+    attributes:
+      label: Test criteria
+      description: The tests this PR must include.
+      placeholder: |
+        - [ ] test name — what it asserts
+    validations:
+      required: true
+  - type: textarea
+    id: done
+    attributes:
+      label: Done when
+      placeholder: |
+        - [ ] code merged with tests above
+        - [ ] `cargo test -p catan-core` passes
+    validations:
+      required: true
+  - type: textarea
+    id: out_of_scope
+    attributes:
+      label: Out of scope
+      description: Things that look related but belong to a different issue.
+  - type: input
+    id: depends
+    attributes:
+      label: Depends on
+      placeholder: "#7, #9 (leave blank if none)"

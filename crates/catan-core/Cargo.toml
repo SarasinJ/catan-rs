@@ -1,0 +1,10 @@
+[package]
+name = "catan-core"
+version.workspace = true
+edition.workspace = true
+
+# No dependencies yet — issues #1 and #5 add serde and rand when first needed,
+# via `serde = { workspace = true }` (versions come from the root Cargo.toml).
+[dependencies]
+
+[dev-dependencies]
