@@ -6,5 +6,6 @@ edition.workspace = true
 # No dependencies yet — issues #1 and #5 add serde and rand when first needed,
 # via `serde = { workspace = true }` (versions come from the root Cargo.toml).
 [dependencies]
+serde = { version = "1.0.229", features = ["derive"] }
 
 [dev-dependencies]

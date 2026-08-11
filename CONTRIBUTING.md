@@ -54,8 +54,8 @@ CI runs the first three automatically on every PR.
 ## Local commands
 
 ```bash
-cargo test -p catan-core        # test just the engine crate (fast)
-cargo test --workspace          # test everything
-cargo fmt --all                 # auto-format
-cargo clippy --workspace --all-targets   # lint
+cargo test -p catan-core        
+cargo test --workspace          
+cargo fmt --all                 
+cargo clippy --workspace --all-targets 
 ```
