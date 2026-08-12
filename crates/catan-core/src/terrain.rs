@@ -1,5 +1,5 @@
-use serde::{Deserialize, Serialize};
 use crate::resource::Resource;
+use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub enum Terrain {
@@ -28,7 +28,7 @@ impl Terrain {
             Terrain::Pasture => Some(Resource::Wool),
             Terrain::Fields => Some(Resource::Grain),
             Terrain::Mountains => Some(Resource::Ore),
-            Terrain::Desert => None
+            Terrain::Desert => None,
         }
     }
 }
@@ -39,23 +39,22 @@ mod tests {
 
     #[test]
     fn each_terrain_maps_correctly() {
-        assert_eq!(Terrain::Hills.produces().unwrap(),Resource::Brick);
-        assert_eq!(Terrain::Forest.produces().unwrap(),Resource::Lumber);
-        assert_eq!(Terrain::Pasture.produces().unwrap(),Resource::Wool);
-        assert_eq!(Terrain::Fields.produces().unwrap(),Resource::Grain);
-        assert_eq!(Terrain::Mountains.produces().unwrap(),Resource::Ore);
+        assert_eq!(Terrain::Hills.produces().unwrap(), Resource::Brick);
+        assert_eq!(Terrain::Forest.produces().unwrap(), Resource::Lumber);
+        assert_eq!(Terrain::Pasture.produces().unwrap(), Resource::Wool);
+        assert_eq!(Terrain::Fields.produces().unwrap(), Resource::Grain);
+        assert_eq!(Terrain::Mountains.produces().unwrap(), Resource::Ore);
         assert_eq!(Terrain::Desert.produces(), None);
     }
     #[test]
     fn only_desert_is_barren() {
         let all = Terrain::ALL;
 
-        for i in 0..all.len() {
-            if all[i] == Terrain::Desert {
-                assert!(all[i].produces().is_none())
-            }
-            else {
-                assert!(all[i].produces().is_some())
+        for terrain in all {
+            if terrain == Terrain::Desert {
+                assert!(terrain.produces().is_none())
+            } else {
+                assert!(terrain.produces().is_some())
             }
         }
     }
