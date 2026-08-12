@@ -15,3 +15,4 @@
 // pub mod board;      // #9–#12  Board, robber, production
 
 pub mod resource;
+pub mod terrain;
