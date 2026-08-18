@@ -58,10 +58,7 @@ mod tests {
 
     #[test]
     fn total_adds_dice() {
-        let dice = Roll {
-            die1: 3,
-            die2: 5,
-        };
+        let dice = Roll { die1: 3, die2: 5 };
 
         assert_eq!(dice.total(), 8)
     }
