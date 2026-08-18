@@ -5,10 +5,10 @@
 //!
 //! Modules land one issue at a time. Uncomment each line as its issue merges:
 
-// pub mod counts;     // #6  ResourceCounts (hands and the bank)
 // pub mod hex;        // #7, #8  Hex coordinates and board positions
 // pub mod board;      // #9–#12  Board, robber, production
 
+pub mod counts;
 pub mod dev_card;
 pub mod dice;
 pub mod resource;
