@@ -16,6 +16,12 @@ pub enum CountsError {
     },
 }
 
+impl Default for ResourceCounts {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl ResourceCounts {
     pub fn new() -> Self {
         Self(HashMap::new())
@@ -39,7 +45,7 @@ impl ResourceCounts {
     pub fn add(&mut self, r: Resource, n: u8) {
         *self.0.entry(r).or_insert(0) += n;
     }
-    
+
     /// Removes n of r, or returns an error and leaves self UNCHANGED.
     pub fn try_remove(&mut self, r: Resource, n: u8) -> Result<(), CountsError> {
         let count = self.get(r);
