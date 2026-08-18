@@ -5,7 +5,6 @@
 //!
 //! Modules land one issue at a time. Uncomment each line as its issue merges:
 
-// pub mod tokens;     // #4  Number tokens
 // pub mod dice;       // #5  Dice with injectable RNG
 // pub mod counts;     // #6  ResourceCounts (hands and the bank)
 // pub mod hex;        // #7, #8  Hex coordinates and board positions
@@ -14,3 +13,4 @@
 pub mod dev_card;
 pub mod resource;
 pub mod terrain;
+pub mod tokens;
