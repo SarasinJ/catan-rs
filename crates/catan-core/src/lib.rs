@@ -2,11 +2,8 @@
 //!
 //! Everything in this crate is deterministic — randomness is always passed in
 //! by the caller — so games can be tested, replayed, and fast-forwarded.
-//!
-//! Modules land one issue at a time. Uncomment each line as its issue merges:
 
-// pub mod board;      // #9–#12  Board, robber, production
-
+pub mod board;
 pub mod counts;
 pub mod dev_card;
 pub mod dice;

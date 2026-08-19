@@ -33,6 +33,10 @@ impl Hex {
         Hex { q, r }
     }
 
+    pub fn origin() -> Self {
+        Hex { q: 0, r: 0 }
+    }
+
     /// The 6 adjacent hex coordinates, using these axial direction offsets
     /// (pointy-top orientation), in this order:
     ///   (+1, -1), (+1, 0), (0, +1), (-1, +1), (-1, 0), (0, -1)
