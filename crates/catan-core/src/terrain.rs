@@ -21,6 +21,15 @@ impl Terrain {
         Terrain::Desert,
     ];
 
+    pub const TERRAIN_COUNTS: [(Terrain, u8); 6] = [
+        (Terrain::Hills, 3),
+        (Terrain::Forest, 4),
+        (Terrain::Pasture, 4),
+        (Terrain::Fields, 4),
+        (Terrain::Mountains, 3),
+        (Terrain::Desert, 1),
+    ];
+
     pub fn produces(&self) -> Option<Resource> {
         match self {
             Terrain::Hills => Some(Resource::Brick),
