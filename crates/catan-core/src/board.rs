@@ -213,12 +213,13 @@ mod tests {
             acc
         });
 
-        let token_counts = board.tiles.values()
-            .filter_map(|tile| tile.token)
-            .fold(HashMap::new(), |mut acc, token| {
+        let token_counts = board.tiles.values().filter_map(|tile| tile.token).fold(
+            HashMap::new(),
+            |mut acc, token| {
                 *acc.entry(token).or_default() += 1;
                 acc
-            });
+            },
+        );
 
         assert_eq!(token_counts, standard_tokens)
     }
