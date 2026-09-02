@@ -11,6 +11,13 @@ pub struct Tile {
 
 pub struct Board {
     tiles: HashMap<Hex, Tile>,
+    robber: Hex,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub enum RobberError {
+    NotOnBoard(Hex),
+    MustMove, // destination == current position
 }
 
 impl Board {
@@ -100,12 +107,22 @@ impl Board {
     pub fn standard_fixed() -> Self {
         let standard_board = standard_positions();
 
-        Self {
-            tiles: standard_board
-                .into_iter()
-                .zip(Self::STANDARD_TILES)
-                .collect(),
-        }
+        let tiles: HashMap<Hex, Tile> = standard_board
+            .into_iter()
+            .zip(Self::STANDARD_TILES)
+            .collect();
+
+        let robber = Self::get_desert_hex(&tiles);
+
+        Self { tiles, robber }
+    }
+
+    fn get_desert_hex(tiles: &HashMap<Hex, Tile>) -> Hex {
+        tiles
+            .iter()
+            .find(|(_, &t)| t.terrain == Terrain::Desert)
+            .map(|(h, _)| *h)
+            .unwrap()
     }
 
     pub fn tile(&self, at: Hex) -> Option<&Tile> {
@@ -114,6 +131,24 @@ impl Board {
 
     pub fn tiles(&self) -> impl Iterator<Item = (&Hex, &Tile)> {
         self.tiles.iter()
+    }
+
+    /// Where the robber is. Starts on desert tile.
+    pub fn robber(&self) -> Hex {
+        self.robber
+    }
+
+    // Validate input, then move robber. On error nothing changes
+    pub fn move_robber(&mut self, to: Hex) -> Result<(), RobberError> {
+        if !self.tiles.contains_key(&to) {
+            return Err(RobberError::NotOnBoard(to));
+        } else if to == self.robber {
+            return Err(RobberError::MustMove);
+        }
+
+        self.robber = to;
+
+        Ok(())
     }
 }
 
@@ -234,5 +269,45 @@ mod tests {
                 _ => assert!(tile.token.is_some()),
             }
         }
+    }
+
+    // robber tests
+    #[test]
+    fn robber_starts_on_desert() {
+        let board = Board::standard_fixed();
+
+        assert_eq!(board.robber, Hex { q: 0, r: -2 })
+    }
+
+    #[test]
+    fn move_to_valid_tile_works() {
+        let mut board = Board::standard_fixed();
+        let target = Hex::origin();
+        let result = board.move_robber(target);
+
+        assert_eq!(result, Ok(()));
+        assert_eq!(board.robber, target)
+    }
+
+    #[test]
+    fn move_off_board_fails() {
+        let mut board = Board::standard_fixed();
+        let starting = board.robber();
+        let target = Hex::new(5, 5);
+        let result = board.move_robber(target);
+
+        assert_eq!(result, Err(RobberError::NotOnBoard(target)));
+        assert_eq!(board.robber, starting)
+    }
+
+    #[test]
+    fn move_to_same_tile_fails() {
+        let mut board = Board::standard_fixed();
+        let starting = board.robber();
+        let target = starting;
+        let result = board.move_robber(target);
+
+        assert_eq!(result, Err(RobberError::MustMove));
+        assert_eq!(board.robber, starting)
     }
 }
